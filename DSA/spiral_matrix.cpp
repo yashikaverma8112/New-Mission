@@ -37,4 +37,5 @@ vector<int>spiralMatrix(vector<vector<int>>&mat){
         }
         colBeg++;
     }
+    return ans;
 }

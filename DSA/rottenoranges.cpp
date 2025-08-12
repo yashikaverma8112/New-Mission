@@ -2,14 +2,15 @@ class Solution {
   public:
     int orangesRotting(vector<vector<int>>& mat) {
         // Code here
-        int res =  0, cnt = 0;
-        int n = mat.size();
-        int m = mat[0].size();
+          int res=0,cnt=0;
         
-        queue<pair<int,int>>q;
+        int n=mat.size();
+        int m=mat[0].size();
         
-        for(int i=0; i<n; i++){
-            for(int j=0; j<n;j++){
+        queue<pair<int,int>> q;
+        
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
                 if(mat[i][j]==2){
                     q.push({i,j});
                 }
@@ -20,39 +21,36 @@ class Solution {
             }
         }
         
-        if(cnt==0){
-            return 0;
-        }
+        if(cnt==0) return 0;
         
         int dx[] = {-1,1,0,0};
         int dy[] = {0,0,-1,1};
         
-        while(!q.empty() && cnt > 0){
+        while(!q.empty() && cnt>0){
             res++;
-            int size = q.size();
+            int sz = q.size();
+            for(int k=0;k<sz;k++){
+            auto it = q.front();
+            int i = it.first;
+            int j = it.second;
+            q.pop();
             
-            for(int k =0; k<size; k++){
-                int i = q.front().first;
-                int j = q.front().second;
+            for(int a =0;a<4;a++){
+                int x = i + dx[a];
+                int y = j + dy[a];
                 
-                q.pop();
-                
-                for(int a=0; a<4; a++){
-                    int x = i+dx[a];
-                    int y = j+dy[a];
-                    
-                    if(x>=0 && x<n && y>=0 && y<m && mat[x][y]==1){
-                        mat[x][y] = 2;
-                        cnt--;
-                        q.push({x,y});
-                    }
+                if(x>=0 && x<n && y>=0 && y<m && mat[x][y]==1){
+                    mat[x][y]=2;
+                    cnt--;
+                    q.push({x,y});
                 }
             }
+            
+            }
+            
         }
         
-        if(cnt > 0){
-            return -1;
-        }        
+        if(cnt>0) return -1;
         
         return res;
     }

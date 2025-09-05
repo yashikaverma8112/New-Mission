@@ -1,46 +1,38 @@
 /*
-  Node is defined as
-    struct node
-    {
-        int data;
-        struct Node* next;
+class Node {
+  public:
+    int data;
+    Node* next;
 
-        Node(int x){
-            data = x;
-            next = NULL;
-        }
-
-    }*head;
+    Node(int x){
+        data = x;
+        next = NULL;
+    }
+};
 */
-
 class Solution {
   public:
+   
     Node *reverseKGroup(Node *head, int k) {
-        if(head == nullptr || k==1 || head->next==nullptr) {
-        return head;
+        if(head==NULL or head->next == NULL){
+            return head;
+        }
+        Node * prev = NULL;
+        Node * curr = head;
+        Node * fwd = NULL;
+        int cnt = 0;
+        
+        while(curr != NULL && cnt < k){
+            fwd = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = fwd;
+            cnt++;
+        }
+        
+        if(fwd != NULL){
+            head->next = reverseKGroup(fwd,k);
+        }
+        return prev;
     }
-    
-    //step1: reverse first k nodes
-    Node* forward = NULL;
-    Node* curr = head;
-    Node* prev = NULL;
-    int count= 0;
-    
-    while( curr != NULL && count < k ) {
-        forward = curr -> next;
-        curr -> next = prev;
-        prev = curr;
-        curr = forward;
-        count++;
-    }
-    
-    //step2: Recursion dekhlega aage ka 
-    if(curr != NULL) {
-        head -> next = reverseKGroup(curr,k);
-    }
-    
-    //step3: return head of reversed list
-    return prev;
-    }
-    
 };

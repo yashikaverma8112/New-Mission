@@ -1,4 +1,4 @@
-// User function Template for C++
+// https://www.geeksforgeeks.org/problems/find-pairs-with-given-sum-in-doubly-linked-list/1
 
 /* Doubly linked list node class
 class Node

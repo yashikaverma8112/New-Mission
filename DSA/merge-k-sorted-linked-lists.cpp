@@ -42,7 +42,12 @@ class Solution {
         return result->next;
     }
     */
-    // TC O(n log n)
+    /*
+Time: O(N log k)
+(N = total number of nodes, k = number of lists)
+
+Space: O(k) for the heap
+*/
     
     struct compare{
         bool operator()(Node*a, Node*b){
